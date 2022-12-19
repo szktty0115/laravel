@@ -27,7 +27,7 @@
                                     <th>人数上限</th>
                                     <th>大会日時</th>
                                     <th></th>
-                                </tr>
+                                </tr>あ
                             </thead>
                             <tbody>
                                 @foreach($query as $user)
