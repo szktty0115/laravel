@@ -7,6 +7,8 @@ use App\General;
 use App\Admin;
 use App\User;
 use App\Tournament;
+use App\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
@@ -35,6 +37,17 @@ class RegistrationController extends Controller
         $tournament->guidelines = $request->guidelines;
 
         $tournament->save();
+        return redirect('/users');
+    }
+    public function caUpdate(Request $request, int $id, User $user)
+    {
+        $userId = Auth::Id();
+
+        $reservation = new Reservation;
+        $reservation->tournament_id = $id;
+        $reservation->user_id = $userId;
+        $reservation->save();
+
         return redirect('/users');
     }
 }

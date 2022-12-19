@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Admin;
+use App\Reservation;
+use App\Tournament;
 
 class UserController extends Controller
 {
@@ -18,19 +20,25 @@ class UserController extends Controller
     {
         $id = Auth::id();
         $role = User::find($id)->role;
-        $query = User::find($id)->get();
 
         if ($role == 1) {
+            $query = User::find($id)->get();
             return view('admins.index')->with([
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
             ]);
         } elseif ($role == 2) {
+            $tId = Reservation::where('user_id', $id)->get();
+            foreach ($tId as $value) {
+                $result = $value->tournament_id;
+            }
+            $query = Tournament::where('id', $result)->get();
             return view('users.index')->with([
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
+                "result" => $result,
             ]);
         } else {
             abort(404);

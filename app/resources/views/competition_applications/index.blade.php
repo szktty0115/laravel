@@ -19,28 +19,28 @@
                                 <tr>
                                     <th>大会名</th>
                                     <th>募集期間</th>
-                                    <th>人数上限</th>
+                                    <th>大会期間</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $query['name'] }}</td>
+                                    <td>{{ $query['starting_date'] }}~~{{ $query['ending_date'] }}</td>
+                                    <td>{{ $query['limit'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <table class="table table-bordered mt-0">
                             <thead class="text-center table-active">
                                 <tr>
-                                    <th>大会日時</th>
+                                    <th>募集期間</th>
                                     <th>募集要項</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $query['recruit_start'] }}~~{{ $query['recruit_end'] }}</td>
+                                    <td>{{ $query['guidelines'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -48,13 +48,13 @@
                     <div class="text-danger text-center mt-4">
                         ※は必須入力です。
                     </div>
-                    <form action="" class="mt-3">
+                    <form method="POST" action="{{ route('ca.update', ['id' => $query->id]) }}" class="mt-3">
                         @csrf
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>ユーザー名</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>ユーザー名</label>
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -62,10 +62,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>生年月日</label>
+                            <label for="birthday" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>生年月日</label>
                             <div class="col-md-6">
-                                <input id="email" type="date" class="form-control text-right @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
+                                <input id="birthday" type="date" class="form-control text-right @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" required autocomplete="birthday" autofocus>
+                                @error('birthday')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -73,10 +73,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>電話番号</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>電話番号</label>
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
+                                <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus>
+
+                                @error('tel')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -95,10 +96,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">コメント</label>
+                            <label for="guidelines" class="col-md-4 col-form-label text-md-right">コメント</label>
                             <div class="col-md-6">
-                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                @error('email')
+                                <input id="guidelines" type="text" class="form-control @error('guidelines') is-invalid @enderror" name="guidelines" value="{{ old('guidelines') }}" required autocomplete="guidelines" autofocus>
+                                @error('guidelines')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

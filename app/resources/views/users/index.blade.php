@@ -30,8 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($query as $user)
-                                @foreach($user->reservation as $value)
+                                @foreach($query as $value)
                                 <tr>
                                     <td>{{ $value['name'] }}</td>
                                     <td>{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</td>
@@ -39,7 +38,6 @@
                                     <td>{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</td>
                                     <td class="text-center"><a href="">削除</a></td>
                                 </tr>
-                                @endforeach
                                 @endforeach
                             </tbody>
                         </table>

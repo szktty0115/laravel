@@ -22,10 +22,9 @@
                                 </div>
                             </div>
                         </form>
+                        @foreach($query as $value)
                         <div class="d-flex justify-content-center">
                             <table>
-                                @foreach($query as $user)
-                                @foreach($user->tournament as $value)
                                 <tr>
                                     <td colspan="4" rowspan="3">
                                         <div class="card">
@@ -50,7 +49,7 @@
                                     <td colspan="1">
                                         <div class="card">
                                             <div class="card-header">人数上限</div>
-                                            <div class="card-body">{{ $value['limit'] }}}}</div>
+                                            <div class="card-body">{{ $value['limit'] }}</div>
                                         </div>
                                     </td>
                                     <td colspan="1">
@@ -70,13 +69,12 @@
                                     </td>
                                     <td></td>
                                 </tr>
-                                @endforeach
-                                @endforeach
                             </table>
                         </div>
-                        <div class="row justify-content-center mt-3">
-                            <a href="" class="btn btn-primary">応募</a>
+                        <div class="row justify-content-center mt-3 mb-4">
+                            <a href="{{ route('ca.index', ['id' => $value['id']]) }}" class="btn btn-primary">応募</a>
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

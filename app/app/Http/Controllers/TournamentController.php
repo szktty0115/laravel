@@ -19,7 +19,11 @@ class TournamentController extends Controller
      */
     public function index()
     {
-        return view('tournaments.index');
+        $query = Tournament::get();
+
+        return view('tournaments.index')->with([
+            'query' => $query,
+        ]);
     }
 
     /**
