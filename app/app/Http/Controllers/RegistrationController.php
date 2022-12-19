@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\General;
 use Illuminate\Http\Request;
+use App\General;
+use App\Admin;
 use App\User;
 
 class RegistrationController extends Controller

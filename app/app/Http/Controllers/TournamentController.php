@@ -42,6 +42,7 @@ class TournamentController extends Controller
     {
         $tournament = new Tournament;
         $id = Auth::id();
+        $query = User::find($id)->get();
         $tournament->user_id = $id;
         $tournament->name = $request->name;
         $tournament->starting_date = $request->starting_date;
@@ -53,7 +54,7 @@ class TournamentController extends Controller
 
         $tournament->save();
 
-        return view('admins.index');
+        return view('admins.index')->with(['id' => $id, 'query' => $query]);
     }
 
     /**

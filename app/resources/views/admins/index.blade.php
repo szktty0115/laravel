@@ -3,7 +3,7 @@
 <div class="container">
     <div class="d-flex justify-content-center mb-4">
         <a href="{{ route('tournaments.create') }}" class="btn btn-primary">新規大会作成</a>
-        <a href="" class="btn btn-primary ml-5">主催者情報編集</a>
+        <a href="/admins/{{ $id }}" class="btn btn-primary ml-5">主催者情報編集</a>
     </div>
 </div>
 <div class="container">
@@ -30,39 +30,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($query as $user)
+                                @foreach($user->tournament as $value)
                                 <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
+                                    <td>{{ $value['name'] }}</td>
+                                    <td>{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</td>
+                                    <td>{{ $value['limit'] }}</td>
+                                    <td>{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</td>
                                     <td class="text-center">
                                         <a href="">応募者一覧</a>
                                         <a href="">編集</a>
                                         <a href="">削除</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td class="text-center">
-                                        <a href="">応募者一覧</a>
-                                        <a href="">編集</a>
-                                        <a href="">削除</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td class="text-center">
-                                        <a href="">応募者一覧</a>
-                                        <a href="">編集</a>
-                                        <a href="">削除</a>
-                                    </td>
-                                </tr>
+                                @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

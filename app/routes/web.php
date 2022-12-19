@@ -1,17 +1,7 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\GeneralController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\TournamentController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\RegistrationController;
-use App\Admin;
-use App\General;
-use App\Reservation;
-use App\Tournament;
-use App\User;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +23,5 @@ Route::resource('admins', 'AdminController');
 Route::resource('users', 'UserController');
 
 Route::post('users/{id}', [RegistrationController::class, 'userUpdate'])->name('user.update');
+
+Route::post('admins/{id}', [AdminController::class, 'adminUpdate'])->name('admin.update');

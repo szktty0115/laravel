@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -45,7 +47,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admins.edit')->with(['id' => $id]);
     }
 
     /**
@@ -80,5 +82,18 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function adminUpdate(Request $request, int $id, User $user)
+    {
+        $query = User::find($id);
+        $query->tel = $request->tel;
+        $query->email = $request->email;
+        $query->save();
+        $admin = Admin::where('user_id', $id)->first();
+        $admin->user_id = $id;
+        $admin->name = $request->name;
+        $admin->address = $request->address;
+        $admin->save();
+        return redirect('/users');
     }
 }

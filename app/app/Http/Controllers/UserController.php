@@ -18,25 +18,22 @@ class UserController extends Controller
     {
         $id = Auth::id();
         $role = User::find($id)->role;
+        $query = User::find($id)->get();
+
         if ($role == 1) {
             return view('admins.index')->with([
                 "id" => $id,
                 "role" => $role,
+                "query" => $query,
             ]);
         } elseif ($role == 2) {
-
-            $query = User::find($id)->with('reservation')->get();
-
             return view('users.index')->with([
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
             ]);
         } else {
-            return view('users.index')->with([
-                "id" => $id,
-                "role" => $role,
-            ]);
+            abort(404);
         }
     }
 
@@ -90,16 +87,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, User $user)
+    public function update(Request $request, $id)
     {
-        $query = User::find($id)->with('general')->get();
-        $query->general->name = $request->name;
-        $query->general->birthday = $request->brithday;
-        $query->tel = $request->tel;
-        $query->email = $request->email;
-
-        $query->save();
-        return redirect('/users');
+        // 
     }
 
     /**
