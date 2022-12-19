@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\General;
 use App\Admin;
 use App\User;
+use App\Tournament;
 
 class RegistrationController extends Controller
 {
@@ -20,6 +21,20 @@ class RegistrationController extends Controller
         $general->name = $request->name;
         $general->birthday = $request->birthday;
         $general->save();
+        return redirect('/users');
+    }
+    public function tournamentUpdate(Request $request, int $id, Tournament $tournament)
+    {
+        $tournament = Tournament::find($id);
+        $tournament->name = $request->name;
+        $tournament->starting_date = $request->starting_date;
+        $tournament->ending_date = $request->ending_date;
+        $tournament->limit = $request->limit;
+        $tournament->recruit_start = $request->recruit_start;
+        $tournament->recruit_end = $request->recruit_end;
+        $tournament->guidelines = $request->guidelines;
+
+        $tournament->save();
         return redirect('/users');
     }
 }

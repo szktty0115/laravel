@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,11 @@ Route::resource('reservations', 'ReservationController');
 Route::resource('admins', 'AdminController');
 Route::resource('users', 'UserController');
 
+Route::get('applicant_list/{id}', [DisplayController::class, 'index'])->name('al.index');
+
 Route::post('users/{id}', [RegistrationController::class, 'userUpdate'])->name('user.update');
 
 Route::post('admins/{id}', [AdminController::class, 'adminUpdate'])->name('admin.update');
+
+Route::get('tournament/{id}', [DisplayController::class, 'tournamentEdit'])->name('tournament.edit');
+Route::post('tournament/{id}', [RegistrationController::class, 'tournamentUpdate'])->name('tournament.update');

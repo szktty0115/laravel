@@ -20,41 +20,23 @@
                                     <th>生年月日</th>
                                     <th>電話番号</th>
                                     <th>メールアドレス</th>
-                                    <th>コメント</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($query as $user)
+                                @foreach($user->general as $value)
                                 <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
+                                    <td>{{ $value['name'] }}</td>
+                                    <td>{{ $value['birthday'] }}</td>
+                                    <td>{{ $user['tel'] }}</td>
+                                    <td>{{ $user['email'] }}</td>
                                     <td class="text-center">
                                         <a href="">削除</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td class="text-center">
-                                        <a href="">削除</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td>sample</td>
-                                    <td class="text-center">
-                                        <a href="">削除</a>
-                                    </td>
-                                </tr>
+                                @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

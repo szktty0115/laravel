@@ -38,9 +38,13 @@
                                     <td>{{ $value['limit'] }}</td>
                                     <td>{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</td>
                                     <td class="text-center">
-                                        <a href="">応募者一覧</a>
-                                        <a href="">編集</a>
-                                        <a href="">削除</a>
+                                        <a href="{{ route('al.index', ['id' => $value['id']]) }}">応募者一覧</a>
+                                        <a href="{{ route('tournament.update', ['id' => $value['id']]) }}">編集</a>
+                                        <form action="/tournaments/{{$value->id}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="submit" class="btn btn-danger mt-3" value="削除" />
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

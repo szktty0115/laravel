@@ -76,7 +76,7 @@ class TournamentController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('tournament.update')->with(['id' => $id]);
     }
 
     /**
@@ -88,7 +88,6 @@ class TournamentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -97,8 +96,10 @@ class TournamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tournament $tournament)
     {
-        //
+        $tournament->delete();
+
+        return redirect('/users');
     }
 }
