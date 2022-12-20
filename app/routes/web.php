@@ -4,6 +4,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\DeleteController;
+use App\Http\Controllers\TournamentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,5 @@ Route::post('tournament/{id}', [RegistrationController::class, 'tournamentUpdate
 
 Route::get('competition_application/{id}', [DisplayController::class, 'caindex'])->name('ca.index');
 Route::post('competition_application/{id}', [RegistrationController::class, 'caUpdate'])->name('ca.update');
+
+// Route::post('tournament/create', [TournamentController::class, 'store'])->name('tournament.create');

@@ -32,7 +32,11 @@
                                     <td>{{ $user['tel'] }}</td>
                                     <td>{{ $user['email'] }}</td>
                                     <td class="text-center">
-                                        <a href="">削除</a>
+                                        <form action="/tournaments/{{$value->id}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="submit" class="btn btn-danger mt-3" value="削除" />
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -56,6 +56,10 @@ class TournamentController extends Controller
         $tournament->recruit_end = $request->recruit_end;
         $tournament->guidelines = $request->guidelines;
 
+        $img = $request->file('img');
+        // storage > public > img配下に画像が保存される
+        $path = $img->store('img', 'public');
+        $tournament->img = $path;
         $tournament->save();
 
         return view('admins.index')->with(['id' => $id, 'query' => $query]);

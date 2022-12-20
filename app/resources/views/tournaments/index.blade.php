@@ -29,7 +29,7 @@
                                     <td colspan="4" rowspan="3">
                                         <div class="card">
                                             <div class="card-header">画像</div>
-                                            <div class="card-body">{{ $value['img'] }}</div>
+                                            <img class="card-body" src="{{ Storage::url($value['img']) }}">
                                         </div>
                                     </td>
                                     <td colspan="4">
