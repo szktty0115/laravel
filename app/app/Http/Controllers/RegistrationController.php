@@ -35,7 +35,13 @@ class RegistrationController extends Controller
         $tournament->recruit_start = $request->recruit_start;
         $tournament->recruit_end = $request->recruit_end;
         $tournament->guidelines = $request->guidelines;
-        $tournament->img = $request->img;
+
+        $img = $request->file('img');
+        // storage > public > img配下に画像が保存される
+        $path = $img->store('img', 'public');
+
+        $tournament->img = $path;
+
         $tournament->save();
         return redirect('/users');
     }

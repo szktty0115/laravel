@@ -36,7 +36,13 @@
                                     <td>{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</td>
                                     <td>{{ $value['limit'] }}</td>
                                     <td>{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</td>
-                                    <td class="text-center"><a href="">削除</a></td>
+                                    <td>
+                                        <form action="/tournaments/{{$value->id}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <input type="submit" class="btn btn-danger mt-3" value="削除" />
+                                        </form>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

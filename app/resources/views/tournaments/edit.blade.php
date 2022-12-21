@@ -15,7 +15,7 @@
                     <div class="text-danger text-center mt-4">
                         ※は必須入力です。
                     </div>
-                    <form method="POST" action="" class="mt-3">
+                    <form method="POST" action="/tournaments" enctype="multipart/form-data" class="mt-3">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>大会名</label>

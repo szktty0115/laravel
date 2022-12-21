@@ -15,7 +15,7 @@
                     <form method="POST" action="{{ route('admin.update', ['id' => $id]) }}" class="mt-3">
                         @csrf
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">会社名</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>会社名</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                 @error('name')
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="address" class="col-md-4 col-form-label text-md-right">所在地</label>
+                            <label for="address" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>所在地</label>
                             <div class="col-md-6">
                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
                                 @error('address')
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="tel" class="col-md-4 col-form-label text-md-right">電話番号</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>電話番号</label>
                             <div class="col-md-6">
                                 <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="emtelail" value="{{ old('tel') }}" required autocomplete="tel" autofocus>
                                 @error('tel')
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>メールアドレス</label>
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
