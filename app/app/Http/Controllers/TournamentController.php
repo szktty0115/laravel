@@ -49,7 +49,7 @@ class TournamentController extends Controller
         $query = User::find($id)->get();
         $tournament->user_id = $id;
         $tournament->name = $request->name;
-        $tournament->starting_date = $request->starting_date;
+        $tournament->starting_date = $request->starng_date;
         $tournament->ending_date = $request->ending_date;
         $tournament->limit = $request->limit;
         $tournament->recruit_start = $request->recruit_start;
@@ -59,7 +59,9 @@ class TournamentController extends Controller
         $img = $request->file('img');
         // storage > public > img配下に画像が保存される
         $path = $img->store('img', 'public');
+
         $tournament->img = $path;
+
         $tournament->save();
 
         return view('admins.index')->with(['id' => $id, 'query' => $query]);

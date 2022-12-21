@@ -11,6 +11,7 @@
                         </h3>
                     </div>
                 </div>
+
                 <div class="card-body">
                     <div class="container">
                         <form action="">
@@ -22,14 +23,15 @@
                                 </div>
                             </div>
                         </form>
+
                         @foreach($query as $value)
                         <div class="d-flex justify-content-center">
                             <table>
                                 <tr>
-                                    <td colspan="4" rowspan="3">
+                                    <td colspan="4" rowspan="3" width="30%">
                                         <div class="card">
                                             <div class="card-header">画像</div>
-                                            <img class="card-body" src="{{ Storage::url($value['img']) }}">
+                                            <img class="card-body" src="{{ Storage::url($value['img']) }}" width="100%">
                                         </div>
                                     </td>
                                     <td colspan="4">
