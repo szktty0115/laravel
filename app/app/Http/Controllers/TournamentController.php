@@ -17,12 +17,19 @@ class TournamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $query = Tournament::get();
+        $keyword = $request->input('keyword');
+        $query = Tournament::query();
+        if (!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('guidelines', 'LIKE', "%{$keyword}%");
+        }
+        $query = $query->get();
 
         return view('tournaments.index')->with([
             'query' => $query,
+            'keyword' => $keyword,
         ]);
     }
 

@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function index(Request $request)
     {
         $id = Auth::id();
         $role = User::find($id)->role;
@@ -33,10 +33,12 @@ class UserController extends Controller
                 "query" => $query,
             ]);
         } elseif ($role == 2) {
+
             $tId = Reservation::where('user_id', $id)->get();
             foreach ($tId as $value) {
                 $result = $value->tournament_id;
             }
+
             $query = Tournament::where('id', $result)->get();
             return view('users.index')->with([
                 "id" => $id,

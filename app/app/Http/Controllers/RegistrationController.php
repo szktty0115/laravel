@@ -35,7 +35,7 @@ class RegistrationController extends Controller
         $tournament->recruit_start = $request->recruit_start;
         $tournament->recruit_end = $request->recruit_end;
         $tournament->guidelines = $request->guidelines;
-
+        $tournament->img = $request->img;
         $tournament->save();
         return redirect('/users');
     }

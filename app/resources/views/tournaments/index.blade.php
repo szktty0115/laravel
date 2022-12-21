@@ -14,11 +14,11 @@
 
                 <div class="card-body">
                     <div class="container">
-                        <form action="">
+                        <form action="/tournaments" method="GET">
                             @csrf
                             <div class="row justify-content-center mb-3">
                                 <div class="col-md-6 input-group">
-                                    <input id="" type="text" class="form-control" name="" value="">
+                                    <input id="" type="text" class="form-control" name="keyword" value="{{ $keyword }}">
                                     <button class="btn btn-outline-secondary" type="submit">検索</button>
                                 </div>
                             </div>

@@ -94,6 +94,19 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="img" class="col-md-4 col-form-label text-md-right">画像</label>
+                            <div class="col-md-6">
+                                <input id="img" type="file" class="form-control @error('img') is-invalid @enderror" name="img" value="{{ old('img') }}" required autocomplete="img" autofocus>
+                                @error('img')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="text-center mt-3">
                             <button type="submit" class="btn btn-primary">確認</button>
                         </div>

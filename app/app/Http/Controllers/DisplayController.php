@@ -39,7 +39,6 @@ class DisplayController extends Controller
         $userId = Auth::id();
         $tId = Reservation::find($userId)->tournament_id;
         $query = Tournament::where('id', $tId)->get();
-
         return view('/users')->with(['query' => $query]);
     }
 }

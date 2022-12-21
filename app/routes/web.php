@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\TournamentController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
