@@ -85,6 +85,7 @@
     </div>
 </div>
 @endsection
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
@@ -132,14 +133,11 @@
                 console.log(data);
                 // コンテンツ生成
                 $.each(data[0], function(key, val) {
-                    add_content = "<div class='d-flex justify-content-center'><table><tr><td colspan='4'rowspan='3' width='30%'><div class='card'><div class='card-header'>画像</div><img src='" + "{{ Storage::url(" + val.img + ") }} '" + " class='card-body' width='100%'></div></td><td colspan='4'><div class='card'><div class='card-header'>大会名</div><div class='card-body'>" + val.name + "</div></div></td></tr><tr><td colspan='2'><div class='card'><div class='card-header'>募集期間</div><div class='card-body'>" + val.starting_date + "~" + val.ending_date + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>人数上限</div><div class='card-body'>" + val.limit + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>大会日時</div><div class='card-body'>" + val.recruit_start + "~" + val.recruit_end + "</div></div></td><td></td></tr><tr><td colspan='4'><div class='card'><div class='card-header'>募集要項</div><div class='card-body'>" + val.guidelines + "</div></div></td><td></td></tr></table></div><div class='row justify-content-center mt-3 mb-4'><a href='{{ route('ca.index', ['id' => " + val.id + "]) }}' class='btn btn-primary'>応募</a></div>";
+                    add_content = "<div class='d-flex justify-content-center'><table><tr><td colspan='4'rowspan='3' width='30%'><div class='card'><div class='card-header'>画像</div><img src='/storage/" + val.img + "' class='card-body' width='100%'></div></td><td colspan='4'><div class='card'><div class='card-header'>大会名</div><div class='card-body'>" + val.name + "</div></div></td></tr><tr><td colspan='2'><div class='card'><div class='card-header'>募集期間</div><div class='card-body'>" + val.starting_date + "~" + val.ending_date + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>人数上限</div><div class='card-body'>" + val.limit + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>大会日時</div><div class='card-body'>" + val.recruit_start + "~" + val.recruit_end + "</div></div></td><td></td></tr><tr><td colspan='4'><div class='card'><div class='card-header'>募集要項</div><div class='card-body'>" + val.guidelines + "</div></div></td><td></td></tr></table></div><div class='row justify-content-center mt-3 mb-4'><a href='{{ route('ca.index', ['id' => " + val.id + "]) }}' class='btn btn-primary'>応募</a></div>";
                     $("#content").append(add_content);
-                }) //画像表示がない
+                }) //画像表示ができない
+
                 // コンテンツ追加
-                // console.log(count);
-                // // 取得件数を加算してセット
-                // Number(count) += Number(5);
-                // console.log(count);
                 $("#count").val(data[1]);
             }).fail(function(e) {
                 console.log(e);
