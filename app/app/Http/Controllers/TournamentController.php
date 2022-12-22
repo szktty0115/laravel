@@ -25,12 +25,26 @@ class TournamentController extends Controller
             $query->where('name', 'LIKE', "%{$keyword}%")
                 ->orWhere('guidelines', 'LIKE', "%{$keyword}%");
         }
-        $query = $query->get();
+        $count = 5;
+        $query = $query->limit($count)->get();
 
         return view('tournaments.index')->with([
             'query' => $query,
             'keyword' => $keyword,
         ]);
+    }
+    public function ajax(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $query = Tournament::query();
+        if (!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('guidelines', 'LIKE', "%{$keyword}%");
+        }
+        $count = $request->count;
+        $query = $query->offset($count)->limit(5)->get();
+
+        return array($query, $count + 5);
     }
 
     /**

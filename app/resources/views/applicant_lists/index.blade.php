@@ -8,6 +8,7 @@
                     <div class="d-flex justify-content-center mt-1">
                         <h3 class="header-title text-center">
                             <strong>応募情報一覧</strong>
+                            @csrf
                         </h3>
                     </div>
                 </div>
