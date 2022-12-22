@@ -95,15 +95,18 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
+            // ajax post送信するために必要
         });
+
         // スクロールされた時に実行
         $(window).on("scroll", function() {
             // スクロール位置
-            const bodyHeight = $(document).innerHeight(); // bodyの高さを取得
-            const windowHeight = window.innerHeight; // windowの高さを取得
+            const bodyHeight = $(document).innerHeight(); // body(全ての長さ)の高さを取得
+            const windowHeight = window.innerHeight; // windowの高さを取得(ブラウザで見えているもの)
 
             let sclTop = $(window).scrollTop();
             const bottomPoint = bodyHeight - windowHeight - sclTop;
+            //スクロールした長さ　＊要注意
 
             // 画面最下部にスクロールされている場合
             if (bottomPoint <= 1) {
@@ -119,7 +122,6 @@
             var count = $("#count").val();
             console.log(count);
             var keyword = $("#keyword").val();
-
             // ajax処理
             $.post({
                 type: "post",
@@ -128,15 +130,15 @@
                 data: {
                     count: count,
                     keyword: keyword,
-                }
+                } //
+
             }).done(function(data) {
                 console.log(data);
                 // コンテンツ生成
                 $.each(data[0], function(key, val) {
-                    add_content = "<div class='d-flex justify-content-center'><table><tr><td colspan='4'rowspan='3' width='30%'><div class='card'><div class='card-header'>画像</div><img src='/storage/" + val.img + "' class='card-body' width='100%'></div></td><td colspan='4'><div class='card'><div class='card-header'>大会名</div><div class='card-body'>" + val.name + "</div></div></td></tr><tr><td colspan='2'><div class='card'><div class='card-header'>募集期間</div><div class='card-body'>" + val.starting_date + "~" + val.ending_date + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>人数上限</div><div class='card-body'>" + val.limit + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>大会日時</div><div class='card-body'>" + val.recruit_start + "~" + val.recruit_end + "</div></div></td><td></td></tr><tr><td colspan='4'><div class='card'><div class='card-header'>募集要項</div><div class='card-body'>" + val.guidelines + "</div></div></td><td></td></tr></table></div><div class='row justify-content-center mt-3 mb-4'><a href='{{ route('ca.index', ['id' => " + val.id + "]) }}' class='btn btn-primary'>応募</a></div>";
+                    add_content = "<div class='d-flex justify-content-center'><table><tr><td colspan='4'rowspan='3' width='30%'><div class='card'><div class='card-header'>画像</div><img src='/storage/" + val.img + "' class='card-body' width='100%'></div></td><td colspan='4'><div class='card'><div class='card-header'>大会名</div><div class='card-body'>" + val.name + "</div></div></td></tr><tr><td colspan='2'><div class='card'><div class='card-header'>募集期間</div><div class='card-body'>" + val.starting_date + "~" + val.ending_date + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>人数上限</div><div class='card-body'>" + val.limit + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>大会日時</div><div class='card-body'>" + val.recruit_start + "~" + val.recruit_end + "</div></div></td><td></td></tr><tr><td colspan='4'><div class='card'><div class='card-header'>募集要項</div><div class='card-body'>" + val.guidelines + "</div></div></td><td></td></tr></table></div><div class='row justify-content-center mt-3 mb-4'><a href='competition_application/" + val.id + "' class='btn btn-primary'>応募</a></div>";
                     $("#content").append(add_content);
-                }) //画像表示ができない
-
+                })
                 // コンテンツ追加
                 $("#count").val(data[1]);
             }).fail(function(e) {
