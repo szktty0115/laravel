@@ -8,6 +8,7 @@ use App\User;
 use App\Admin;
 use App\Reservation;
 use App\Tournament;
+use App\General;
 
 class UserController extends Controller
 {
@@ -24,6 +25,10 @@ class UserController extends Controller
     {
         $id = Auth::id();
         $role = User::find($id)->role;
+        $rId = Reservation::where('user_id', $id);
+        if (empty($rId)) {
+            abort(404);
+        }
 
         if ($role == 1) {
             $query = Tournament::where('user_id', $id)->orderBy('starting_date')->get();
@@ -33,33 +38,17 @@ class UserController extends Controller
                 "query" => $query,
             ]);
         } elseif ($role == 2) {
-            $query = Reservation::where('user_id', $id)->get();
+            $query = Reservation::where('user_id', $id)->orderBy('starting_date')->get();
             return view('users.index')->with([
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
+                "rId" => $rId,
             ]);
-
-            // if (!empty($query)) {
-            //     return view('users.index')->with([
-            //         "id" => $id,
-            //         "role" => $role,
-            //         "query" => $query,
-            //     ]);
-            // } elseif (empty($result)) {
-            //     $query = '';
-            //     $query = 2;
-            //     return view('users.index')->with([
-            //         "id" => $id,
-            //         "role" => $role,
-            //         "query" => $query,
-            //     ]);
-            // }
         } else {
             abort(404);
         }
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -89,7 +78,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return view('users.edit')->with(['id' => $id]);
+        $query = User::find($id);
+        $general = General::where('user_id', $id)->first();
+        return view('users.edit')->with(['general' => $general, 'id' => $id, 'query' => $query,]);
     }
 
     /**

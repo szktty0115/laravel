@@ -47,7 +47,9 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        return view('admins.edit')->with(['id' => $id]);
+        $query = User::find($id);
+        $admin = Admin::where('user_id', $id)->first();
+        return view('admins.edit')->with(['admin' => $admin, 'id' => $id, 'query' => $query,]);
     }
 
     /**
@@ -58,7 +60,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 
     }
 
     /**
@@ -90,6 +92,14 @@ class AdminController extends Controller
         $query->email = $request->email;
         $query->save();
         $admin = Admin::where('user_id', $id)->first();
+        if (empty($admin)) {
+            $admin = new admin;
+            $admin->user_id = $id;
+            $admin->name = $request->name;
+            $admin->address = $request->address;
+            $admin->save();
+            return redirect('/users');
+        }
         $admin->user_id = $id;
         $admin->name = $request->name;
         $admin->address = $request->address;

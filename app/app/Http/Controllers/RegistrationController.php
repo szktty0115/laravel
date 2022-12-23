@@ -19,6 +19,14 @@ class RegistrationController extends Controller
         $query->email = $request->email;
         $query->save();
         $general = General::where('user_id', $id)->first();
+        if (empty($general)) {
+            $general = new general;
+            $general->user_id = $id;
+            $general->name = $request->name;
+            $general->birthday = $request->birthday;
+            $general->save();
+            return redirect('/users');
+        }
         $general->user_id = $id;
         $general->name = $request->name;
         $general->birthday = $request->birthday;
@@ -48,10 +56,16 @@ class RegistrationController extends Controller
     public function caUpdate(Request $request, int $id, User $user)
     {
         $userId = Auth::Id();
-
+        $tournament = Tournament::find($id);
         $reservation = new Reservation;
-        $reservation->tournament_id = $id;
         $reservation->user_id = $userId;
+        $reservation->name = $tournament->name;
+        $reservation->starting_date = $tournament->starting_date;
+        $reservation->ending_date = $tournament->ending_date;
+        $reservation->recruit_start = $tournament->recruit_start;
+        $reservation->recruit_end = $tournament->recruit_end;
+        $reservation->comment = $request->comment;
+
         $reservation->save();
 
         return redirect('/users');

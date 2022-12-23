@@ -13,4 +13,8 @@ class Reservation extends Model
     {
         return $this->hasMany('App\User');
     }
+    public function tournament()
+    {
+        return $this->hasMany('App\Tournament');
+    }
 }

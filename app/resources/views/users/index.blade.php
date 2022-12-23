@@ -19,39 +19,32 @@
                 </div>
                 <div class="card-body">
                     <div class="container">
-                        @dd($query)
-                        @if($query = '')
-                        <div>予約済みの大会はありません。</div>
-                        @else
                         <table class="table table-bordered mt-2">
                             <thead class="text-center table-active">
                                 <tr>
                                     <th>大会名</th>
-                                    <th>募集期間</th>
-                                    <th>人数上限</th>
                                     <th>大会日時</th>
+                                    <th>募集期間</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($query->tournament as $value)
+                                @foreach($query as $value)
                                 <tr>
                                     <td>{{ $value['name'] }}</td>
                                     <td>{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</td>
-                                    <td>{{ $value['limit'] }}</td>
-                                    <td>{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</td>
+                                    <td>{{ $value['recruit_start'] }}~{{ $value['recruit_end'] }}</td>
                                     <td>
                                         <form action="/tournaments/{{$value->id}}" method="POST" onclick="return confirm('本当に削除しますか??')">
                                             @method('DELETE')
                                             @csrf
-                                            <input type="submit" class="btn btn-danger mt-3" value="削除" />
+                                            <input type="submit" class="btn btn-danger mt-2" value="削除" />
                                         </form>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        @endif
                     </div>
                 </div>
             </div>

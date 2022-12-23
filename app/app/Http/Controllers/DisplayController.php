@@ -26,7 +26,7 @@ class DisplayController extends Controller
     public function caindex(int $id)
     {
         $userId = Auth::id();
-        $query = Tournament::find($id)->first();
+        $query = Tournament::find($id);
         $user = User::find($userId);
         return view('competition_applications.index')->with(['query' => $query, 'user' => $user]);
     }
