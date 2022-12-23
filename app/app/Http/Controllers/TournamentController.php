@@ -65,27 +65,27 @@ class TournamentController extends Controller
      */
     public function store(Request $request)
     {
-        $tournament = new Tournament;
-        $id = Auth::id();
-        $query = User::find($id)->get();
-        $tournament->user_id = $id;
-        $tournament->name = $request->name;
-        $tournament->starting_date = $request->starng_date;
-        $tournament->ending_date = $request->ending_date;
-        $tournament->limit = $request->limit;
-        $tournament->recruit_start = $request->recruit_start;
-        $tournament->recruit_end = $request->recruit_end;
-        $tournament->guidelines = $request->guidelines;
+        // $id = Auth::id();
+        // $tournament = Tournament::find($id);
+        // $tournament->user_id = $id;
+        // $tournament->name = $request->name;
+        // $tournament->starting_date = $request->starting_date;
+        // $tournament->ending_date = $request->ending_date;
+        // $tournament->limit = $request->limit;
+        // $tournament->recruit_start = $request->recruit_start;
+        // $tournament->recruit_end = $request->recruit_end;
+        // $tournament->guidelines = $request->guidelines;
 
-        $img = $request->file('img');
-        // storage > public > img配下に画像が保存される
-        $path = $img->store('img', 'public');
+        // $img = $request->file('img');
+        // // storage > public > img配下に画像が保存される
+        // $path = $img->store('img', 'public');
 
-        $tournament->img = $path;
+        // $tournament->img = $path;
 
-        $tournament->save();
+        // $tournament->save();
+        // $query = User::find($id)->get();
 
-        return view('admins.index')->with(['id' => $id, 'query' => $query]);
+        // return view('admins.index')->with(['id' => $id, 'query' => $query]);
     }
 
     /**
@@ -130,7 +130,6 @@ class TournamentController extends Controller
     public function destroy(Tournament $tournament)
     {
         $tournament->delete();
-
         return redirect('/users');
     }
 }

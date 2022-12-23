@@ -19,6 +19,10 @@
                 </div>
                 <div class="card-body">
                     <div class="container">
+                        @dd($query)
+                        @if($query = '')
+                        <div>予約済みの大会はありません。</div>
+                        @else
                         <table class="table table-bordered mt-2">
                             <thead class="text-center table-active">
                                 <tr>
@@ -30,14 +34,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($query as $value)
+                                @foreach($query->tournament as $value)
                                 <tr>
                                     <td>{{ $value['name'] }}</td>
                                     <td>{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</td>
                                     <td>{{ $value['limit'] }}</td>
                                     <td>{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</td>
                                     <td>
-                                        <form action="/tournaments/{{$value->id}}" method="POST">
+                                        <form action="/tournaments/{{$value->id}}" method="POST" onclick="return confirm('本当に削除しますか??')">
                                             @method('DELETE')
                                             @csrf
                                             <input type="submit" class="btn btn-danger mt-3" value="削除" />
@@ -47,6 +51,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @endif
                     </div>
                 </div>
             </div>

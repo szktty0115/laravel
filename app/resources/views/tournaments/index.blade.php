@@ -24,7 +24,6 @@
                                 </div>
                             </div>
                         </form>
-
                         @foreach($query as $value)
                         <div class="d-flex justify-content-center">
                             <table>
@@ -58,7 +57,7 @@
                                     <td colspan="1">
                                         <div class="card">
                                             <div class="card-header">大会日時</div>
-                                            <div class="card-body">{{ $value['recruit_start'] }}~{{ $value['recuit_end'] }}</div>
+                                            <div class="card-body">{{ $value['recruit_start'] }}~{{ $value['recruit_end'] }}</div>
                                         </div>
                                     </td>
                                     <td></td>
@@ -131,7 +130,6 @@
                     count: count,
                     keyword: keyword,
                 } //
-
             }).done(function(data) {
                 console.log(data);
                 // コンテンツ生成

@@ -26,24 +26,35 @@ class UserController extends Controller
         $role = User::find($id)->role;
 
         if ($role == 1) {
-            $query = User::find($id)->get();
+            $query = Tournament::where('user_id', $id)->orderBy('starting_date')->get();
             return view('admins.index')->with([
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
             ]);
         } elseif ($role == 2) {
-            $tId = Reservation::where('user_id', $id)->get();
-            foreach ($tId as $value) {
-                $result = $value->tournament_id;
-            }
-            $query = Tournament::where('id', $result)->get();
+            $query = Reservation::where('user_id', $id)->get();
             return view('users.index')->with([
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
-                "result" => $result,
             ]);
+
+            // if (!empty($query)) {
+            //     return view('users.index')->with([
+            //         "id" => $id,
+            //         "role" => $role,
+            //         "query" => $query,
+            //     ]);
+            // } elseif (empty($result)) {
+            //     $query = '';
+            //     $query = 2;
+            //     return view('users.index')->with([
+            //         "id" => $id,
+            //         "role" => $role,
+            //         "query" => $query,
+            //     ]);
+            // }
         } else {
             abort(404);
         }

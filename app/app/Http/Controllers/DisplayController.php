@@ -25,14 +25,16 @@ class DisplayController extends Controller
     }
     public function caindex(int $id)
     {
+        $userId = Auth::id();
         $query = Tournament::find($id)->first();
-
-        return view('competition_applications.index')->with(['query' => $query, 'id']);
+        $user = User::find($userId);
+        return view('competition_applications.index')->with(['query' => $query, 'user' => $user]);
     }
 
     public function tournamentEdit(int $id)
     {
-        return view('tournaments.edit');
+        $query = Tournament::find($id);
+        return view('tournaments.edit')->with(['query' => $query]);
     }
     public function userindex(int $id)
     {
@@ -40,5 +42,9 @@ class DisplayController extends Controller
         $tId = Reservation::find($userId)->tournament_id;
         $query = Tournament::where('id', $tId)->get();
         return view('/users')->with(['query' => $query]);
+    }
+    public function tournamentCreate(int $id)
+    {
+        return view('tournaments.create')->with(['id' => $id]);
     }
 }

@@ -36,6 +36,9 @@ Route::post('admins/{id}', [AdminController::class, 'adminUpdate'])->name('admin
 Route::get('tournament/{id}', [DisplayController::class, 'tournamentEdit'])->name('tournament.edit');
 Route::post('tournament/{id}', [RegistrationController::class, 'tournamentUpdate'])->name('tournament.update');
 
+Route::get('tournament/{id}/create', [DisplayController::class, 'tournamentCreate'])->name('tournament.create');
+Route::post('tournament/{id}/create', [RegistrationController::class, 'tournamentCreate'])->name('tournament.create');
+
 Route::get('competition_application/{id}', [DisplayController::class, 'caindex'])->name('ca.index');
 Route::post('competition_application/{id}', [RegistrationController::class, 'caUpdate'])->name('ca.update');
 

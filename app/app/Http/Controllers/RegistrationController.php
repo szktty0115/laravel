@@ -56,4 +56,25 @@ class RegistrationController extends Controller
 
         return redirect('/users');
     }
+    public function tournamentCreate(Request $request, int $id, Tournament $tournament)
+    {
+        $tournament = new Tournament;
+        $tournament->user_id = $id;
+        $tournament->name = $request->name;
+        $tournament->starting_date = $request->starting_date;
+        $tournament->ending_date = $request->ending_date;
+        $tournament->limit = $request->limit;
+        $tournament->recruit_start = $request->recruit_start;
+        $tournament->recruit_end = $request->recruit_end;
+        $tournament->guidelines = $request->guidelines;
+
+        $img = $request->file('img');
+        // storage > public > img配下に画像が保存される
+        $path = $img->store('img', 'public');
+
+        $tournament->img = $path;
+
+        $tournament->save();
+        return redirect('/users');
+    }
 }
