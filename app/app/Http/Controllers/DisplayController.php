@@ -7,6 +7,7 @@ use App\General;
 use App\Tournament;
 use App\User;
 use Illuminate\Console\Application;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,13 @@ class DisplayController extends Controller
         $result = Reservation::find($id);
 
         if (empty($result)) {
-            abort(404);
+            $userId = Auth::id();
+            $query = Tournament::where('user_id', $userId)->orderBy('starting_date')->get();
+            return view('admins.index')->with([
+                'message' => '応募者はいません',
+                "id" => $userId,
+                "query" => $query,
+            ]);
         } else {
             $rId = Reservation::find($id)->id;
             $query = User::find($rId)->get();

@@ -17,6 +17,9 @@
                         </h3>
                     </div>
                 </div>
+                @if(!empty($message))
+                <p class='h3 pt-4 text-center'>{{ $message }}</p>
+                @endif
                 <div class="card-body">
                     <div class="container">
                         <table class="table table-bordered mt-2">
