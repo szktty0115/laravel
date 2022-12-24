@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reservation;
+use App\General;
 use App\Tournament;
 use App\User;
 use Illuminate\Console\Application;
@@ -28,7 +29,11 @@ class DisplayController extends Controller
         $userId = Auth::id();
         $query = Tournament::find($id);
         $user = User::find($userId);
-        return view('competition_applications.index')->with(['query' => $query, 'user' => $user]);
+        $general = General::where('user_id', $userId)->first();
+        if (empty($general)) {
+            return view('users.edit')->with(['query' => $query, 'user' => $user, 'general' => $general, 'id' => $userId]);
+        }
+        return view('competition_applications.index')->with(['query' => $query, 'user' => $user, 'general' => $general]);
     }
 
     public function tournamentEdit(int $id)

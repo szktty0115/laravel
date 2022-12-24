@@ -53,7 +53,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>ユーザー名</label>
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user['name'] }}" required autocomplete="name" autofocus readonly>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $general['name'] }}" required autocomplete="name" autofocus readonly>
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
                         <div class="form-group row">
                             <label for="birthday" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>生年月日</label>
                             <div class="col-md-6">
-                                <input id="birthday" type="text" class="form-control text-right @error('birthday') is-invalid @enderror" name="birthday" value="{{ $user['birthday'] }}" required autocomplete="birthday" autofocus readonly>
+                                <input id="birthday" type="text" class="form-control text-right @error('birthday') is-invalid @enderror" name="birthday" value="{{ $general['birthday'] }}" required autocomplete="birthday" autofocus readonly>
                                 @error('birthday')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
