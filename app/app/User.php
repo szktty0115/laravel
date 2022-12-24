@@ -34,10 +34,6 @@ class User extends Authenticatable
      * @param  string  $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPasswordNotification($token));
-    }
 
     /**
      * The attributes that should be cast to native types.
@@ -86,8 +82,4 @@ class User extends Authenticatable
      * @param  string  $token
      * @return void
      */
-    public function sendPasswordResetNotification($token)
-    {
-        $this->notify(new ResetPassword($token)); //****変更****
-    }
 }

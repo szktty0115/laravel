@@ -2,6 +2,10 @@ version: "3.8"
 
 # コンテナ群の記述
 services:
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 8026:8025
   # nginxというサービス
   nginx:
     # コンテナ名指定
