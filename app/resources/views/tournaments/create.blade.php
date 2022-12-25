@@ -105,8 +105,6 @@
                                 @enderror
                             </div>
                         </div>
-                        <input type="text" name="admin_name" value="{{ $admins->name }}" hidden>
-                        <input type="text" name="admin_address" value="{{ $admins->address }}" hidden>
                         <div class="text-center mt-3">
                             <button type="submit" class="btn btn-primary">確認</button>
                         </div>

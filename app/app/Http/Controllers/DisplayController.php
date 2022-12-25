@@ -63,4 +63,10 @@ class DisplayController extends Controller
             'admins' => $admins
         ]);
     }
+    public function userEdit($id)
+    {
+        $query = User::find($id);
+        $general = General::where('user_id', $id)->first();
+        return view('users.edit')->with(['general' => $general, 'id' => $id, 'query' => $query,]);
+    }
 }

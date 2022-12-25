@@ -39,7 +39,7 @@
                                     <td class="text-center">
                                         <a class="btn btn-primary" href="{{ route('al.index', ['id' => $value['id']]) }}">応募者</a>
                                         <a class="btn btn-primary mt-2" href="{{ route('tournament.update', ['id' => $value['id']]) }}">編集</a>
-                                        <form action="/tournaments/{{$value->id}}" method="POST" onclick="return confirm('本当に削除しますか??')">
+                                        <form action="/users/{{$value->id}}" method="POST" onclick="return confirm('本当に削除しますか??')">
                                             @method('DELETE')
                                             @csrf
                                             <input type="submit" class="btn btn-danger mt-2" value="削除" />

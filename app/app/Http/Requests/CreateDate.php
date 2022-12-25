@@ -24,8 +24,8 @@ class CreateDate extends FormRequest
     public function rules()
     {
         return [
-            'tel' => ['required', 'max:12', 'regex:/^[0-9-]+$/'],
-            'limit' => 'integer|max:3|numeric',
+            // 'tel' => ['required', 'max:12', 'regex:/^[0-9-]+$/'],
+            'limit' => 'integer|max:100|numeric',
         ];
     }
 }

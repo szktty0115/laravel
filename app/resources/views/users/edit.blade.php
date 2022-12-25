@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.update', ['id' => $id]) }}" class="mt-3">
+                    <form method="POST" action="{{ route('user.store', ['id' => $id]) }}" class="mt-3">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>ユーザー名</label>

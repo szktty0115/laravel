@@ -23,7 +23,14 @@ class TournamentController extends Controller
         $query = Tournament::query();
         if (!empty($keyword)) {
             $query->where('name', 'LIKE', "%{$keyword}%")
-                ->orWhere('guidelines', 'LIKE', "%{$keyword}%");
+                ->orWhere('guidelines', 'LIKE', "%{$keyword}%")
+                ->orWhere('admin_name', 'LIKE', "%{$keyword}%")
+                ->orWhere('admin_address', 'LIKE', "%{$keyword}%")
+                ->orWhere('limit', 'LIKE', "%{$keyword}%")
+                ->orWhere('starting_date', 'LIKE', "%{$keyword}%")
+                ->orWhere('ending_date', 'LIKE', "%{$keyword}%")
+                ->orWhere('recruit_start', 'LIKE', "%{$keyword}%")
+                ->orWhere('recruit_end', 'LIKE', "%{$keyword}%");
         }
         $count = 5;
         $query = $query->limit($count)->get();
@@ -39,7 +46,14 @@ class TournamentController extends Controller
         $query = Tournament::query();
         if (!empty($keyword)) {
             $query->where('name', 'LIKE', "%{$keyword}%")
-                ->orWhere('guidelines', 'LIKE', "%{$keyword}%");
+                ->orWhere('guidelines', 'LIKE', "%{$keyword}%")
+                ->orWhere('admin_name', 'LIKE', "%{$keyword}%")
+                ->orWhere('admin_address', 'LIKE', "%{$keyword}%")
+                ->orWhere('limit', 'LIKE', "%{$keyword}%")
+                ->orWhere('starting_date', 'LIKE', "%{$keyword}%")
+                ->orWhere('ending_date', 'LIKE', "%{$keyword}%")
+                ->orWhere('recruit_start', 'LIKE', "%{$keyword}%")
+                ->orWhere('recruit_end', 'LIKE', "%{$keyword}%");
         }
         $count = $request->count;
         $query = $query->offset($count)->limit(5)->get();
@@ -65,27 +79,6 @@ class TournamentController extends Controller
      */
     public function store(Request $request)
     {
-        // $id = Auth::id();
-        // $tournament = Tournament::find($id);
-        // $tournament->user_id = $id;
-        // $tournament->name = $request->name;
-        // $tournament->starting_date = $request->starting_date;
-        // $tournament->ending_date = $request->ending_date;
-        // $tournament->limit = $request->limit;
-        // $tournament->recruit_start = $request->recruit_start;
-        // $tournament->recruit_end = $request->recruit_end;
-        // $tournament->guidelines = $request->guidelines;
-
-        // $img = $request->file('img');
-        // // storage > public > img配下に画像が保存される
-        // $path = $img->store('img', 'public');
-
-        // $tournament->img = $path;
-
-        // $tournament->save();
-        // $query = User::find($id)->get();
-
-        // return view('admins.index')->with(['id' => $id, 'query' => $query]);
     }
 
     /**
@@ -129,7 +122,5 @@ class TournamentController extends Controller
      */
     public function destroy(Tournament $tournament)
     {
-        $tournament->delete();
-        return redirect('/users');
     }
 }

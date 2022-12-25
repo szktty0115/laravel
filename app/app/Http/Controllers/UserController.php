@@ -67,9 +67,26 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, int $id)
     {
-        //
+        $query = User::find($id);
+        $query->tel = $request->tel;
+        $query->email = $request->email;
+        $query->save();
+        $general = General::where('user_id', $id)->first();
+        if (empty($general)) {
+            $general = new general;
+            $general->user_id = $id;
+            $general->name = $request->name;
+            $general->birthday = $request->birthday;
+            $general->save();
+            return redirect('/users');
+        }
+        $general->user_id = $id;
+        $general->name = $request->name;
+        $general->birthday = $request->birthday;
+        $general->save();
+        return redirect('/users');
     }
 
     /**
@@ -116,6 +133,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tournament = Tournament::find($id);
+        $tournament->delete();
+
+        return redirect('/users');
     }
 }

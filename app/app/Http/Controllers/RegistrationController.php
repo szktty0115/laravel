@@ -15,24 +15,6 @@ class RegistrationController extends Controller
 {
     public function userUpdate(CreateDate $request, int $id, User $user)
     {
-        $query = User::find($id);
-        $query->tel = $request->tel;
-        $query->email = $request->email;
-        $query->save();
-        $general = General::where('user_id', $id)->first();
-        if (empty($general)) {
-            $general = new general;
-            $general->user_id = $id;
-            $general->name = $request->name;
-            $general->birthday = $request->birthday;
-            $general->save();
-            return redirect('/users');
-        }
-        $general->user_id = $id;
-        $general->name = $request->name;
-        $general->birthday = $request->birthday;
-        $general->save();
-        return redirect('/users');
     }
     public function tournamentUpdate(CreateDate $request, int $id, Tournament $tournament)
     {
@@ -74,6 +56,9 @@ class RegistrationController extends Controller
     }
     public function tournamentCreate(CreateDate $request, int $id, Tournament $tournament)
     {
+        $userId = Auth::id();
+        $admin = Admin::where('user_id', $userId)->first();
+
         $tournament = new Tournament;
         $tournament->user_id = $id;
         $tournament->name = $request->name;
@@ -84,8 +69,8 @@ class RegistrationController extends Controller
         $tournament->recruit_end = $request->recruit_end;
         $tournament->guidelines = $request->guidelines;
 
-        $tournament->admin_name = $request->admin_name;
-        $tournament->admin_address = $request->admin_address;
+        $tournament->admin_name = $admin->name;
+        $tournament->admin_address = $admin->address;
 
 
         $img = $request->file('img');
@@ -113,5 +98,40 @@ class RegistrationController extends Controller
             "query" => $query,
             "admins" => $admins,
         ]);
+    }
+    public function reservationUserDelete(int $id)
+    {
+        $tournament = Reservation::find($id);
+        // find tournamentテーブルと同じIDを持ってくる
+        $tournament->delete();
+
+        $userId = Auth::id();
+
+        $query = Reservation::where('user_id', $userId)->orderBy('starting_date')->get();
+        return view('users.index')->with([
+            "id" => $id,
+            "query" => $query,
+        ]);
+    }
+    public function userStore(Request $request, int $id)
+    {
+        $query = User::find($id);
+        $query->tel = $request->tel;
+        $query->email = $request->email;
+        $query->save();
+        $general = General::where('user_id', $id)->first();
+        if (empty($general)) {
+            $general = new general;
+            $general->user_id = $id;
+            $general->name = $request->name;
+            $general->birthday = $request->birthday;
+            $general->save();
+            return redirect('/users');
+        }
+        $general->user_id = $id;
+        $general->name = $request->name;
+        $general->birthday = $request->birthday;
+        $general->save();
+        return redirect('/users');
     }
 }
