@@ -25,22 +25,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($query as $user)
-                                @foreach($user->general as $value)
+                                @foreach($query as $value)
                                 <tr>
-                                    <td>{{ $value['name'] }}</td>
-                                    <td>{{ $value['birthday'] }}</td>
-                                    <td>{{ $user['tel'] }}</td>
-                                    <td>{{ $user['email'] }}</td>
+                                    <td>{{ $value->user->general->name }}</td>
+                                    <td>{{ $value->user->general->birthday }}</td>
+                                    <td>{{ $value->user->tel }}</td>
+                                    <td>{{ $value->user->email }}</td>
                                     <td class="text-center">
-                                        <form action="/tournaments/{{$value->id}}" method="POST">
-                                            @method('DELETE')
+                                        <form action="{{ route('reservation.delete', ['id' => $value['id']]) }}" method="POST">
                                             @csrf
                                             <input type="submit" class="btn btn-danger mt-3" value="削除" />
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
                                 @endforeach
                             </tbody>
                         </table>

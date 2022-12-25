@@ -24,6 +24,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $id = Auth::id();
+        $admins = Admin::where('user_id', $id)->first();
         $role = User::find($id)->role;
         $rId = Reservation::where('user_id', $id);
         if (empty($rId)) {
@@ -36,6 +37,7 @@ class UserController extends Controller
                 "id" => $id,
                 "role" => $role,
                 "query" => $query,
+                "admins" => $admins,
             ]);
         } elseif ($role == 2) {
             $query = Reservation::where('user_id', $id)->orderBy('starting_date')->get();

@@ -8,11 +8,12 @@ use App\Admin;
 use App\User;
 use App\Tournament;
 use App\Reservation;
+use App\Http\Requests\CreateDate;
 use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
-    public function userUpdate(Request $request, int $id, User $user)
+    public function userUpdate(CreateDate $request, int $id, User $user)
     {
         $query = User::find($id);
         $query->tel = $request->tel;
@@ -33,7 +34,7 @@ class RegistrationController extends Controller
         $general->save();
         return redirect('/users');
     }
-    public function tournamentUpdate(Request $request, int $id, Tournament $tournament)
+    public function tournamentUpdate(CreateDate $request, int $id, Tournament $tournament)
     {
         $tournament = Tournament::find($id);
         $tournament->name = $request->name;
@@ -55,7 +56,7 @@ class RegistrationController extends Controller
     }
     public function caUpdate(Request $request, int $id, User $user)
     {
-        $userId = Auth::Id();
+        $userId = Auth::id();
         $tournament = Tournament::find($id);
         $reservation = new Reservation;
         $reservation->user_id = $userId;
@@ -65,12 +66,13 @@ class RegistrationController extends Controller
         $reservation->recruit_start = $tournament->recruit_start;
         $reservation->recruit_end = $tournament->recruit_end;
         $reservation->comment = $request->comment;
+        $reservation->tournament_id = $id;
 
         $reservation->save();
 
         return redirect('/users');
     }
-    public function tournamentCreate(Request $request, int $id, Tournament $tournament)
+    public function tournamentCreate(CreateDate $request, int $id, Tournament $tournament)
     {
         $tournament = new Tournament;
         $tournament->user_id = $id;
@@ -82,6 +84,10 @@ class RegistrationController extends Controller
         $tournament->recruit_end = $request->recruit_end;
         $tournament->guidelines = $request->guidelines;
 
+        $tournament->admin_name = $request->admin_name;
+        $tournament->admin_address = $request->admin_address;
+
+
         $img = $request->file('img');
         // storage > public > img配下に画像が保存される
         $path = $img->store('img', 'public');
@@ -90,5 +96,22 @@ class RegistrationController extends Controller
 
         $tournament->save();
         return redirect('/users');
+    }
+    public function reservationDelete(int $id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->delete();
+
+        $id = Auth::id();
+        $admins = Admin::where('user_id', $id)->first();
+        $role = User::find($id)->role;
+
+        $query = Tournament::where('user_id', $id)->orderBy('starting_date')->get();
+        return view('admins.index')->with([
+            "id" => $id,
+            "role" => $role,
+            "query" => $query,
+            "admins" => $admins,
+        ]);
     }
 }

@@ -28,6 +28,7 @@ Route::resource('admins', 'AdminController');
 Route::resource('users', 'UserController');
 
 Route::get('applicant_list/{id}', [DisplayController::class, 'index'])->name('al.index');
+Route::post('applicant_list/{id}', [RegistrationController::class, 'reservationDelete'])->name('reservation.delete');
 
 Route::post('users/{id}', [RegistrationController::class, 'userUpdate'])->name('user.update');
 
@@ -43,3 +44,16 @@ Route::get('competition_application/{id}', [DisplayController::class, 'caindex']
 Route::post('competition_application/{id}', [RegistrationController::class, 'caUpdate'])->name('ca.update');
 
 Route::post('/ajax', [TournamentController::class, 'ajax'])->name('ajax');
+
+
+
+
+
+//一般ユーザー
+Route::group(['middleware' => ['auth', 'can:user-higher']], function () {
+    //ここにルートを記述
+});
+// 管理者以上
+Route::group(['middleware' => ['auth', 'can:admin-higher']], function () {
+    //ここにルートを記述
+});

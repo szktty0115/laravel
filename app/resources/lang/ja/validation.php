@@ -144,4 +144,8 @@ return [
     | of "email". This simply helps us make our message more expressive.
     |
     */
+    'attributes' => [
+        'limit' => '人数上限',
+        'tel' => '電話番号',
+    ],
 ];

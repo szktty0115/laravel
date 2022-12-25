@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     {
 
-        return $this->hasMany('App\General');
+        return $this->hasOne('App\General');
     }
 
 

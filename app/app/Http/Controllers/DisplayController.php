@@ -6,6 +6,7 @@ use App\Reservation;
 use App\General;
 use App\Tournament;
 use App\User;
+use App\Admin;
 use Illuminate\Console\Application;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -15,19 +16,17 @@ class DisplayController extends Controller
 {
     public function index(int $id)
     {
-        $result = Reservation::find($id);
+        $result = Reservation::where('tournament_id', $id);
 
         if (empty($result)) {
             $userId = Auth::id();
             $query = Tournament::where('user_id', $userId)->orderBy('starting_date')->get();
             return view('admins.index')->with([
-                'message' => '応募者はいません',
                 "id" => $userId,
                 "query" => $query,
             ]);
         } else {
-            $rId = Reservation::find($id)->id;
-            $query = User::find($rId)->get();
+            $query = Reservation::where('tournament_id', $id)->get();
             return view('applicant_lists.index')->with(['query' => $query]);
         }
     }
@@ -57,6 +56,11 @@ class DisplayController extends Controller
     }
     public function tournamentCreate(int $id)
     {
-        return view('tournaments.create')->with(['id' => $id]);
+        $userId = Auth::id();
+        $admins = Admin::where('user_id', $userId)->first();
+        return view('tournaments.create')->with([
+            'id' => $id,
+            'admins' => $admins
+        ]);
     }
 }
