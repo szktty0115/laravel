@@ -3,7 +3,7 @@
 <div class="container">
     <div class="d-flex justify-content-center mb-4">
         <a href="/tournaments" class="btn btn-outline-dark">大会一覧</a>
-        <a href="{{ route('user.edit', ['id' => $id]) }}" class="btn btn-primary ml-5">ユーザー情報編集</a>
+        <a href="{{ route('user.edit', ['id' => $id]) }}" class="btn btn-outline-dark ml-5">ユーザー情報編集</a>
     </div>
 </div>
 <div class="container">
@@ -37,7 +37,7 @@
                                     <td>
                                         <form action="{{ route('reservation.user.delete', ['id' => $value['id']]) }}" method="POST" onclick="return confirm('本当に削除しますか??')">
                                             @csrf
-                                            <input type="submit" class="btn btn-danger mt-2" value="削除" />
+                                            <input type="submit" class="btn btn-outline-danger mt-2" value="削除" />
                                         </form>
                                     </td>
                                 </tr>

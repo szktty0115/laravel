@@ -18,6 +18,17 @@
                     <form method="POST" action="{{ route('tournament.update', ['id' => $query['id']]) }}" enctype="multipart/form-data" class="mt-3">
                         @csrf
                         <div class="form-group row">
+                            <label for="game_name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>ゲーム名</label>
+                            <div class="col-md-6">
+                                <input id="game_name" type="text" class="form-control @error('game_name') is-invalid @enderror" name="game_name" value="{{ $query['game_name'] }}" required autocomplete="game_name" autofocus>
+                                @error('game_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">※</span>大会名</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $query['name'] }}" required autocomplete="name" autofocus>
@@ -108,7 +119,7 @@
                         </div>
 
                         <div class="text-center mt-3">
-                            <button type="submit" class="btn btn-primary">確認</button>
+                            <button type="submit" class="btn btn-outline-primary">確認</button>
                         </div>
                     </form>
                 </div>

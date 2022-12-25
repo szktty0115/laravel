@@ -20,7 +20,7 @@
                                 <div class="col-md-6 input-group">
                                     <input id="keyword" type="text" class="form-control" name="keyword" value="{{ $keyword }}">
                                     <input type="hidden" id="count" value="5">
-                                    <button class="btn btn-outline-secondary" type="submit">検索</button>
+                                    <button class="btn btn-outline-secondary ml-2" type="submit">検索</button>
                                 </div>
                             </div>
                         </form>
@@ -36,20 +36,20 @@
                                     </td>
                                     <td colspan="1" width='25%'>
                                         <div class="card">
-                                            <div class="card-header">大会名</div>
-                                            <div class="card-body">{{ $value['name'] }}</div>
+                                            <div class="card-header">ゲーム名</div>
+                                            <div class="card-body">{{ $value['game_name'] }}</div>
                                         </div>
                                     </td>
                                     <td colspan="1" width='25%'>
                                         <div class="card">
-                                            <div class="card-header">会社名</div>
-                                            <div class="card-body">{{ $value['admin_name'] }}</div>
+                                            <div class="card-header">大会名</div>
+                                            <div class="card-body">{{ $value['name'] }}</div>
                                         </div>
                                     </td>
                                     <td colspan="1" width='20%'>
                                         <div class="card">
-                                            <div class="card-header">住所</div>
-                                            <div class="card-body">{{ $value['admin_address'] }}</div>
+                                            <div class="card-header">会社名</div>
+                                            <div class="card-body">{{ $value['admin_name'] }}</div>
                                         </div>
                                     </td>
                                 </tr>
@@ -57,13 +57,13 @@
                                     <td colspan="1">
                                         <div class="card">
                                             <div class="card-header">募集期間</div>
-                                            <div class="card-body">{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</div>
+                                            <div class="card-body">{{ date('Y-m-d', strtotime($value['starting_date'])) }}~{{ date('Y-m-d', strtotime($value['ending_date'])) }}</div>
                                         </div>
                                     </td>
                                     <td colspan="1">
                                         <div class="card">
                                             <div class="card-header">大会日時</div>
-                                            <div class="card-body">{{ $value['recruit_start'] }}~{{ $value['recruit_end'] }}</div>
+                                            <div class="card-body">{{ date('Y-m-d', strtotime($value['recruit_start'])) }}~{{ date('Y-m-d', strtotime($value['recruit_end'])) }}</div>
                                         </div>
                                     </td>
                                     <td colspan="1">
@@ -85,7 +85,7 @@
                             </table>
                         </div>
                         <div class="row justify-content-center mt-3 mb-4">
-                            <a href="{{ route('ca.index', ['id' => $value['id']]) }}" class="btn btn-primary">応募</a>
+                            <a href="{{ route('ca.index', ['id' => $value['id']]) }}" class="btn btn-outline-primary">応募</a>
                         </div>
                         @endforeach
                     </div>
@@ -145,7 +145,7 @@
                 console.log(data);
                 // コンテンツ生成
                 $.each(data[0], function(key, val) {
-                    add_content = "<div class='d-flex justify-content-center'><table><tr><td colspan='4'rowspan='3' width='30%'><div class='card'><div class='card-header'>画像</div><img src='/storage/" + val.img + "' class='card-body' width='100%'></div></td>  <td colspan='1' width='25%'><div class='card'><div class='card-header'>大会名</div><div class='card-body'>" + val.name + "</div></div></td> <td colspan='1' width='25%'><div class='card'><div class='card-header'>会社名</div><div class='card-body'>" + val.admin_name + "</div></div></td> <td colspan='1' width='20%'><div class='card'><div class='card-header'>住所</div><div class='card-body'>" + val.admin_address + "</div></div></td></tr> <tr><td colspan='1'><div class='card'><div class='card-header'>募集期間</div><div class='card-body'>" + val.starting_date + "~" + val.ending_date + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>大会日時</div><div class='card-body'>" + val.recruit_start + "~" + val.recruit_end + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>人数上限</div><div class='card-body'>" + val.limit + "</div></div></td></tr> <tr><td colspan='4'><div class='card'><div class='card-header'>募集要項</div><div class='card-body'>" + val.guidelines + "</div></div></td></tr></table> </div><div class='row justify-content-center mt-3 mb-4'><a href='competition_application/" + val.id + "' class='btn btn-primary'>応募</a></div>";
+                    add_content = "<div class='d-flex justify-content-center'><table><tr><td colspan='4'rowspan='3' width='30%'><div class='card'><div class='card-header'>画像</div><img src='/storage/" + val.img + "' class='card-body' width='100%'></div></td>  <td colspan='1' width='25%'><div class='card'><div class='card-header'>ゲーム名</div><div class='card-body'>" + val.game_name + "</div></div></td> <td colspan='1' width='25%'><div class='card'><div class='card-header'>大会名</div><div class='card-body'>" + val.name + "</div></div></td> <td colspan='1' width='20%'><div class='card'><div class='card-header'>会社名</div><div class='card-body'>" + val.admin_name + "</div></div></td></tr> <tr><td colspan='1'><div class='card'><div class='card-header'>募集期間</div><div class='card-body'>" + val.starting_date + "~" + val.ending_date + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>大会日時</div><div class='card-body'>" + val.recruit_start + "~" + val.recruit_end + "</div></div></td><td colspan='1'><div class='card'><div class='card-header'>人数上限</div><div class='card-body'>" + val.limit + "</div></div></td></tr> <tr><td colspan='4'><div class='card'><div class='card-header'>募集要項</div><div class='card-body'>" + val.guidelines + "</div></div></td></tr></table> </div><div class='row justify-content-center mt-3 mb-4'><a href='competition_application/" + val.id + "' class='btn btn-outline-primary'>応募</a></div>";
                     $("#content").append(add_content);
                 })
                 // コンテンツ追加

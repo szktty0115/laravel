@@ -20,6 +20,7 @@ class RegistrationController extends Controller
     {
         $tournament = Tournament::find($id);
         $tournament->name = $request->name;
+        $tournament->game_name = $request->game_name;
         $tournament->starting_date = $request->starting_date;
         $tournament->ending_date = $request->ending_date;
         $tournament->limit = $request->limit;
@@ -62,6 +63,7 @@ class RegistrationController extends Controller
         $tournament = new Tournament;
         $tournament->user_id = $id;
         $tournament->name = $request->name;
+        $tournament->game_name = $request->game_name;
         $tournament->starting_date = $request->starting_date;
         $tournament->ending_date = $request->ending_date;
         $tournament->limit = $request->limit;

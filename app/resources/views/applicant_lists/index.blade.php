@@ -34,7 +34,7 @@
                                     <td class="text-center">
                                         <form action="{{ route('reservation.delete', ['id' => $value['id']]) }}" method="POST">
                                             @csrf
-                                            <input type="submit" class="btn btn-danger mt-3" value="削除" />
+                                            <input type="submit" class="btn btn-outline-danger mt-3" onclick="return confirm('本当に削除しますか??')" value="削除" />
                                         </form>
                                     </td>
                                 </tr>

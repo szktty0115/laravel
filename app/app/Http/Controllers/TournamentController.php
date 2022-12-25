@@ -23,6 +23,7 @@ class TournamentController extends Controller
         $query = Tournament::query();
         if (!empty($keyword)) {
             $query->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('game_name', 'LIKE', "%{$keyword}%")
                 ->orWhere('guidelines', 'LIKE', "%{$keyword}%")
                 ->orWhere('admin_name', 'LIKE', "%{$keyword}%")
                 ->orWhere('admin_address', 'LIKE', "%{$keyword}%")
@@ -46,13 +47,14 @@ class TournamentController extends Controller
         $query = Tournament::query();
         if (!empty($keyword)) {
             $query->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('game_name', 'LIKE', "%{$keyword}%")
                 ->orWhere('guidelines', 'LIKE', "%{$keyword}%")
                 ->orWhere('admin_name', 'LIKE', "%{$keyword}%")
                 ->orWhere('admin_address', 'LIKE', "%{$keyword}%")
                 ->orWhere('limit', 'LIKE', "%{$keyword}%")
                 ->orWhere('starting_date', 'LIKE', "%{$keyword}%")
                 ->orWhere('ending_date', 'LIKE', "%{$keyword}%")
-                ->orWhere('recruit_start', 'LIKE', "%{$keyword}%")
+                ->orWhere('recruit_starting', 'LIKE', "%{$keyword}%")
                 ->orWhere('recruit_end', 'LIKE', "%{$keyword}%");
         }
         $count = $request->count;

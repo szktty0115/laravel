@@ -2,8 +2,8 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-center mb-4">
-        <a href="{{ route('tournament.create', ['id' => $id]) }}" class="btn btn-primary">新規大会作成</a>
-        <a href="/admins/{{ $id }}" class="btn btn-primary ml-5">主催者情報編集</a>
+        <a href="{{ route('tournament.create', ['id' => $id]) }}" class="btn btn-outline-primary">新規大会作成</a>
+        <a href="/admins/{{ $id }}" class="btn btn-outline-primary ml-5">主催者情報編集</a>
     </div>
 </div>
 <div class="container">
@@ -33,16 +33,16 @@
                                 @foreach($query as $value)
                                 <tr>
                                     <td>{{ $value['name'] }}</td>
-                                    <td>{{ $value['starting_date'] }}~{{ $value['ending_date'] }}</td>
+                                    <td>{{ date('Y-m-d', strtotime($value['starting_date'])) }}~{{ date('Y-m-d', strtotime($value['ending_date'])) }}</td>
                                     <td>{{ $value['limit'] }}</td>
-                                    <td>{{ $value['recruit_start'] }}~{{ $value['recruit_end'] }}</td>
+                                    <td>{{ date('Y-m-d', strtotime($value['recruit_start'])) }}~{{ date('Y-m-d', strtotime($value['recruit_end'])) }}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-primary" href="{{ route('al.index', ['id' => $value['id']]) }}">応募者</a>
-                                        <a class="btn btn-primary mt-2" href="{{ route('tournament.update', ['id' => $value['id']]) }}">編集</a>
+                                        <a class="btn btn-outline-primary" href="{{ route('al.index', ['id' => $value['id']]) }}">応募者</a>
+                                        <a class="btn btn-outline-primary mt-2" href="{{ route('tournament.update', ['id' => $value['id']]) }}">編集</a>
                                         <form action="/users/{{$value->id}}" method="POST" onclick="return confirm('本当に削除しますか??')">
                                             @method('DELETE')
                                             @csrf
-                                            <input type="submit" class="btn btn-danger mt-2" value="削除" />
+                                            <input type="submit" class="btn btn-outline-danger mt-2" value="削除" />
                                         </form>
                                     </td>
                                 </tr>

@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-3">
-                            <button type="submit" class="btn btn-primary">確認</button>
+                            <button type="submit" class="btn btn-outline-primary">確認</button>
                         </div>
                     </form>
                 </div>
