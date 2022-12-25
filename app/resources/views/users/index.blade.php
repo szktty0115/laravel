@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
     <div class="d-flex justify-content-center mb-4">
-        <a href="/tournaments" class="btn btn-primary">大会一覧</a>
+        <a href="/tournaments" class="btn btn-outline-dark">大会一覧</a>
         <a href="{{ route('user.edit', ['id' => $id]) }}" class="btn btn-primary ml-5">ユーザー情報編集</a>
     </div>
 </div>
