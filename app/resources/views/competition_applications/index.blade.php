@@ -17,29 +17,30 @@
                         <table class="table table-bordered mb-0 mt-2">
                             <thead class="text-center table-active">
                                 <tr>
-
+                                    <th>ゲーム名</th>
                                     <th>大会名</th>
                                     <th>大会期間</th>
-                                    <th>募集人数</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>{{ $query['game_name'] }}</td>
                                     <td>{{ $query['name'] }}</td>
                                     <td>{{ date('Y-m-d', strtotime($query['starting_date'])) }}~~{{ date('Y-m-d', strtotime($query['ending_date'])) }}</td>
-                                    <td>{{ $query['limit'] }}</td>
                                 </tr>
                             </tbody>
                         </table>
                         <table class="table table-bordered mt-0">
                             <thead class="text-center table-active">
                                 <tr>
+                                    <th>募集人数</th>
                                     <th>募集期間</th>
                                     <th>募集要項</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>{{ $query['limit'] }}</td>
                                     <td>{{ date('Y-m-d', strtotime($query['recruit_start'])) }}~~{{ date('Y-m-d', strtotime($query['recruit_end'])) }}</td>
                                     <td>{{ $query['guidelines'] }}</td>
                                 </tr>

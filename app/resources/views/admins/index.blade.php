@@ -22,6 +22,7 @@
                         <table class="table table-bordered mt-2">
                             <thead class="text-center table-active">
                                 <tr>
+                                    <th>ゲーム名</th>
                                     <th>大会名</th>
                                     <th>募集期間</th>
                                     <th>人数上限</th>
@@ -32,6 +33,7 @@
                             <tbody>
                                 @foreach($query as $value)
                                 <tr>
+                                    <td>{{ $value['game_name'] }}</td>
                                     <td>{{ $value['name'] }}</td>
                                     <td>{{ date('Y-m-d', strtotime($value['starting_date'])) }}~{{ date('Y-m-d', strtotime($value['ending_date'])) }}</td>
                                     <td>{{ $value['limit'] }}</td>
